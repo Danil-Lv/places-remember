@@ -1,27 +1,15 @@
-from allauth.socialaccount.models import SocialAccount
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 
 
 def index(requests):
-
     if not requests.user.is_anonymous:
-        user_social_account = SocialAccount.objects.get(user_id=requests.user.id)
-
-        context = {'first_name': user_social_account.user.first_name,
-                   'avatar': user_social_account.get_avatar_url()
-                   }
-        return render(requests, template_name='user/html/profile.html', context=context)
+        return redirect('profile')
 
     else:
         return render(requests, template_name='user/html/index.html')
 
 
-
 def profile(requests):
-    user_social_account = SocialAccount.objects.get(user_id=requests.user.id)
+    return render(requests, template_name='user/html/profile.html')
 
-    context = {'first_name': user_social_account.user.first_name,
-               'avatar': user_social_account.get_avatar_url()
-               }
 
-    return render(requests, template_name='user/html/profile.html', context=context)

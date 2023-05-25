@@ -1,13 +1,33 @@
 {% extends 'base.html' %}
 
 {% block content %}
-    <section class="pt-5 text-center">
-            <div class="container">
-                <div class="pt-5 row">
-                    <div class="col-lg-8 col-xl-6 mx-auto">
-                        <h1>У вас пока нет воспоминаний</h1>
+
+    <div class="container">
+        <a class="btn btn-primary my-2" href="{% url 'add_place' %}" role="button">Добавить воспоминание</a>
+        {% if user.places.count == 0 %}
+            <h1>У вас нет воспоминаний</h1>
+        {% else %}
+
+            <div class="row">
+                {% for place in user.places.all %}
+                    <div class="col-md-3 col-sm-6 col-xs-12 my-2">
+                        <div class="card h-100 my-2">
+
+                            <div class="card-body">
+                                <h5 class="card-title">{{ place.title }}</h5>
+                                <p class="card-text">{{ place.description|truncatewords:20 }}</p>
+                            </div>
+                            <div class="card-footer">
+                                <a href="{% url 'show_place' place.slug %}" class="btn btn-primary">Открыть</a>
+                            </div>
+
+                        </div>
                     </div>
-                </div>
+                {% endfor %}
+
             </div>
-    </section>
+        {% endif %}
+
+    </div>
 {% endblock %}
+

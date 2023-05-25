@@ -1,4 +1,9 @@
+from os import getenv
 from pathlib import Path
+
+from dotenv import load_dotenv
+
+load_dotenv()
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -27,35 +32,16 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 
     'src.user.apps.UserConfig',
+    'src.place.apps.PlaceConfig',
 
     'allauth',
     'allauth.account',
     'allauth.socialaccount',
     'allauth.socialaccount.providers.vk',
     'allauth.socialaccount.providers.google',
+
+    'location_field.apps.DefaultConfig',
 ]
-
-# Provider specific settings
-SOCIALACCOUNT_PROVIDERS = {
-    'google': {
-        # For each OAuth based provider, either add a ``SocialApp``
-        # (``socialaccount`` app) containing the required client
-        # credentials, or list them here:
-        'APP': {
-            'client_id': '570987818819-vrd29nrk1mmspse63kf90q29gu11bvj8.apps.googleusercontent.com',
-            'secret': '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',
-            'key': ''
-        }
-    },
-    # 'vk': {
-    #     'APP': {
-    #         'client_id': '51651708',
-    #         'secret': 'tc0Y0oea4Ygt9ymBDF9k',
-    #         'key': '01daa54e01daa54e01daa54ed102ce8132001da01daa54e65b25460222b471dff08d896'
-    #     }
-    # }
-
-}
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -81,6 +67,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'src.user.context_processors.get_avatar_and_username'
             ],
         },
     },
@@ -137,19 +124,36 @@ STATIC_URL = 'static/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
+# Map settings
+LOCATION_FIELD = {
+    'provider.google.api': '//maps.google.com/maps/api/js?sensor=false',
+    'provider.google.api_key': getenv('GOOGLE_MAPS_API_KEY'),
+    'provider.google.api_libraries': '',
+    'provider.google.map.type': 'ROADMAP',
+}
+
+# Authentication settings
 SITE_ID = 1
 LOGIN_REDIRECT_URL = 'main'
 
 SOCIALACCOUNT_LOGIN_ON_GET = True
 ACCOUNT_LOGOUT_ON_GET = True
 
-# Google
-# Client ID
-# 570987818819-vrd29nrk1mmspse63kf90q29gu11bvj8.apps.googleusercontent.com
-# Client secret
-# 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
+# Provider specific settings
+SOCIALACCOUNT_PROVIDERS = {
+    'google': {
+        'APP': {
+            'client_id': getenv('GOOGLE_CLIENT_ID'),
+            'secret': getenv('GOOGLE_CLIENT_SECRET'),
+        }
+    },
 
-# VK
-# ID приложения 51651708
-# Защищённый ключ tc0Y0oea4Ygt9ymBDF9k
-# Сервисный ключ доступа 01daa54e01daa54e01daa54ed102ce8132001da01daa54e65b25460222b471dff08d896
+    'vk': {
+        'APP': {
+            'client_id': getenv('VK_APP_ID'),
+            'secret': getenv('VK_SECRET_KEY'),
+            'key': getenv('VK_SERVICE_ACCESS_KEY')
+        }
+
+    }
+}
