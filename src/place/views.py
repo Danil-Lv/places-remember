@@ -5,7 +5,7 @@ from django.views.generic import DetailView, DeleteView, View
 
 from .forms import PlaceForm
 from .models import Place
-from .utils import create_slug, BeAuthorRequiredMixin
+from .utils import create_slug, AuthorPermissionMixin
 
 
 class AddPlaceView(LoginRequiredMixin, View):
@@ -33,7 +33,7 @@ class AddPlaceView(LoginRequiredMixin, View):
 
 class PlaceDetailView(
     LoginRequiredMixin,
-    BeAuthorRequiredMixin,
+    AuthorPermissionMixin,
     DetailView
 ):
     """Display of location"""
@@ -44,7 +44,7 @@ class PlaceDetailView(
 
 class PlaceDeleteView(
     LoginRequiredMixin,
-    BeAuthorRequiredMixin,
+    AuthorPermissionMixin,
     DeleteView
 ):
     """Deleting a place"""
