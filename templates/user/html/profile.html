@@ -18,7 +18,8 @@
                                 <p class="card-text">{{ place.description|truncatewords:20 }}</p>
                             </div>
                             <div class="card-footer">
-                                <a href="{% url 'show_place' place.slug %}" class="btn btn-primary">Открыть</a>
+                                <a href="{{ place.get_absolute_url }}" class="btn btn-primary">Открыть</a>
+
                             </div>
 
                         </div>
@@ -29,5 +30,8 @@
         {% endif %}
 
     </div>
+
+
+
 {% endblock %}
 

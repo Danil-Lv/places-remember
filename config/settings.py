@@ -3,6 +3,7 @@ from pathlib import Path
 
 from dotenv import load_dotenv
 
+
 load_dotenv()
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -17,7 +18,8 @@ SECRET_KEY = 'django-insecure-ut%iql(k)!u+s(q$i+dtnrn%&1_+d@kwkvb=v8wkxbc(!1e#_c
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['localhost']
+ALLOWED_HOSTS = ['localhost',
+                 '127.0.0.1']
 
 AUTH_USER_MODEL = "user.User"
 
@@ -139,6 +141,7 @@ LOGIN_REDIRECT_URL = 'main'
 SOCIALACCOUNT_LOGIN_ON_GET = True
 ACCOUNT_LOGOUT_ON_GET = True
 
+#
 # Provider specific settings
 SOCIALACCOUNT_PROVIDERS = {
     'google': {

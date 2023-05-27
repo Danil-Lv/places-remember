@@ -2,5 +2,4 @@ from django.contrib import admin
 
 from src.place.models import Place
 
-# Register your models here.
 admin.site.register(Place)
