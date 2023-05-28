@@ -15,6 +15,9 @@ class Place(models.Model):
     def get_absolute_url(self):
         return reverse('show_place', kwargs={'slug': self.slug})
 
+    def get_delete_url(self):
+        return reverse('delete_place', kwargs={'slug': self.slug})
+
     def __str__(self):
         return self.title
 

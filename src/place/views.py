@@ -1,7 +1,8 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.urls import reverse_lazy
 from django.views.generic import DetailView, DeleteView, View, ListView
+from django.views.generic.edit import BaseDeleteView
 
 from .forms import PlaceForm
 from .models import Place
@@ -33,7 +34,7 @@ class AddPlaceView(LoginRequiredMixin, View):
 
 
 class PlaceDetailView(LoginRequiredMixin, AuthorPermissionMixin, DetailView):
-    """Displaying of location"""
+    """Displaying of place"""
     model = Place
     template_name = 'place/html/place.html'
     login_url = reverse_lazy('main')
@@ -43,11 +44,10 @@ class PlaceDeleteView(LoginRequiredMixin, AuthorPermissionMixin, DeleteView):
     """Deleting the place"""
     model = Place
     success_url = reverse_lazy('profile')
-    login_url = reverse_lazy('main')
 
-    def get_queryset(self):
-        queryset = Place.objects.get(slug=self.kwargs['slug'])
-        return super().get_queryset()
+    def get_object(self, queryset=None):
+        place = Place.objects.get(slug=self.kwargs['slug'])
+        return super().get_object()
 
 
 class PlacesListView(ListView):
