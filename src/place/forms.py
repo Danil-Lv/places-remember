@@ -15,8 +15,8 @@ class PlaceForm(forms.ModelForm):
         fields = ['title', 'description', 'location']
         widgets = {
             'title': forms.TextInput(attrs={'class': 'form-control'}),
-            'description': forms.TextInput(attrs={'class': 'form-control'}),
-            'location': forms.TextInput(attrs={'class': 'form-control'}),
+            'description': forms.Textarea(attrs={'class': 'form-control my-2', 'rows': 5}),
+            'location': forms.TextInput(attrs={'class': 'form-control', 'type': 'hidden', 'label': 'q'}),
         }
 
     def clean_location(self):

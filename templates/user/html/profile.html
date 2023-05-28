@@ -3,25 +3,30 @@
 {% block content %}
 
     <div class="container">
-        <a class="btn btn-primary my-2" href="{% url 'add_place' %}" role="button">Добавить воспоминание</a>
         {% if user.places.count == 0 %}
-            <h1>У вас нет воспоминаний</h1>
+            <div class="position-absolute top-50 start-50 translate-middle">
+                <h1>У вас нет воспоминаний</h1>
+                <div class="col align-self-center d-flex justify-content-center">
+                    <a class="btn btn-primary my-2 d-inline-flex" href="{% url 'add_place' %}" role="button">Добавить
+                    воспоминание</a>
+                </div>
+
+            </div>
         {% else %}
+            <a class="btn btn-primary my-2" href="{% url 'add_place' %}" role="button">Добавить воспоминание</a>
 
             <div class="row">
+
                 {% for place in user.places.all %}
                     <div class="col-md-3 col-sm-6 col-xs-12 my-2">
                         <div class="card h-100 my-2">
-
                             <div class="card-body">
                                 <h5 class="card-title">{{ place.title }}</h5>
                                 <p class="card-text">{{ place.description|truncatewords:20 }}</p>
                             </div>
                             <div class="card-footer">
                                 <a href="{{ place.get_absolute_url }}" class="btn btn-primary">Открыть</a>
-
                             </div>
-
                         </div>
                     </div>
                 {% endfor %}

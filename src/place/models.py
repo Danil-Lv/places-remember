@@ -6,7 +6,7 @@ from ..user.models import User
 
 class Place(models.Model):
     """Place"""
-    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='places', verbose_name='Id создателя')
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='places', verbose_name='Id автора')
     title = models.CharField(max_length=50, verbose_name='Название')
     description = models.TextField(blank=True, verbose_name='Описание')
     location = PlainLocationField(zoom=7)
@@ -14,6 +14,9 @@ class Place(models.Model):
 
     def get_absolute_url(self):
         return reverse('show_place', kwargs={'slug': self.slug})
+
+    def __str__(self):
+        return self.title
 
     class Meta:
         ordering = ['-id']
