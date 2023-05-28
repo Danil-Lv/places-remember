@@ -1,10 +1,11 @@
-from django.urls import path, include
+from django.urls import path
 
-from .views import index, profile
+from .views import index
+from ..place.views import PlacesListView
 
 urlpatterns = [
     path('', index, name='main'),
-    path('profile/', profile, name='profile'),
+    path('profile/', PlacesListView.as_view(), name='profile'),
 
 ]
 
