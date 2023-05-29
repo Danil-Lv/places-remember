@@ -29,7 +29,7 @@ VK_SERVICE_ACCESS_KEY = 01daa54e01daa54e01daa54ed102ce8132001da01daa54e65b254602
 `. my-project-env/bin/activate`
 
 6. Установите зависимости
-`pip install -r requirements.txt`
+`pip install -r req.txt`
  
 7. Создайте миграции
 ```
