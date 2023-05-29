@@ -22,6 +22,11 @@ VK_APP_ID = 51651708
 VK_SECRET_KEY = tc0Y0oea4Ygt9ymBDF9k
 VK_SERVICE_ACCESS_KEY = 01daa54e01daa54e01daa54ed102ce8132001da01daa54e65b25460222b471dff08d896
 ```
+При использовании бесплатного API ключа Google Maps карта отобразится с водяными знаками и окном с ошибкой, которое можно закрыть:  
+<img width="419" alt="Screenshot 2023-05-29 at 18 01 43" src="https://github.com/Danil-Lv/places_remember/assets/121132552/bdedf575-b776-4e06-8829-10416919efa2">. 
+
+Если оплатить доступ к API Google Maps, то карта будет отображена корректно. 
+
 4. Установите виртуальное окружение:
 `python3 -m venv my-project-env`
  
